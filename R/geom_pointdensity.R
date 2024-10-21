@@ -46,7 +46,7 @@ StatPointdensity <- ggproto("StatPointdensity", Stat,
                             default_aes = aes(color = stat(density)),
                             required_aes = c("x", "y"),
 
-                            compute_layer = function(self, data, params, layout) {
+                            compute_layer = function(self, data, params, layout, grouping) {
                               # This function mostly copied from ggplot2's Stat
                               ggplot2:::check_required_aesthetics(
                                 self$required_aes,
@@ -150,8 +150,11 @@ StatPointdensity <- ggproto("StatPointdensity", Stat,
                               }
 
 
-                              data$ndensity <- data$density/max(data$density)
-
+                              data <- data %>%
+                              group_by(grouping) %>%
+                              mutate(ndensity = density/max(density)) %>%
+                              ungroup()
+                              
                               data
                             }
 )
