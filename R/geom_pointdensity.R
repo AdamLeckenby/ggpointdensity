@@ -23,7 +23,8 @@ stat_pointdensity <- function(mapping = NULL,
                               method = "auto",
                               method.args = list(),
                               show.legend = NA,
-                              inherit.aes = TRUE) {
+                              inherit.aes = TRUE,
+                             grouping=grouping) {
   layer(
     data = data,
     mapping = mapping,
@@ -167,7 +168,8 @@ geom_pointdensity <- function(mapping = NULL,
                               method = "auto",
                               na.rm = FALSE,
                               show.legend = NA,
-                              inherit.aes = TRUE) {
+                              inherit.aes = TRUE,
+                             grouping=grouping) {
 
   ggplot2::layer(
     data = data,
